@@ -33,6 +33,8 @@ class Solution:
             i += 1
         return ret[:]
 
+# 自己开始想的一个思路，但是超时了。。。，写完第三个发现思路基本一致，就是忘了
+# tuple可以用set来进行去重了。。。
 class MySolution:
     def twoSum(self, nums, source_index, target):
         i = 0
@@ -64,3 +66,26 @@ class MySolution:
                     ret.append(tmp)
             i += 1
         return ret[:]
+
+# 看了暴力加哈希表写的
+class TwoViolentWithHashSolution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        ret = []
+        cache = {}
+        i = 0
+        if nums is None or len(nums) < 3:
+            return []
+        while i < len(nums):
+            cache[nums[i]] = i
+            i += 1
+        i = 0
+        while i < len(nums) - 1:
+            j = i + 1
+            while j < len(nums):
+                if cache.get(0-nums[i]-nums[j], False):
+                    z = cache[0-nums[i]-nums[j]]
+                    if z != i and z != j:
+                        ret.append(tuple(sorted([nums[i], nums[j], 0-nums[i]-nums[j]])))
+                j += 1
+            i += 1
+        return [list(x) for x in set(ret)]
