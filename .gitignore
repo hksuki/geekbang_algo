@@ -1,5 +1,6 @@
 .vscode/
 .idea/
 .git/
+.vs/
 CMakeLists.txt
 cmake-build-debug/
